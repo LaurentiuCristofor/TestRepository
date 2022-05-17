@@ -11,7 +11,7 @@ build/
 *pyc
 
 # Generated header files.
-#*_generated.h
+*_generated.h
 
 # Java class files.
 *.class
