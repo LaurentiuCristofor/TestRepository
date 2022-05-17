@@ -19,36 +19,36 @@ else()
     add_executable(Tutorial Tutorial.cpp Utils.cpp MonsterHelper.cpp)
     target_include_directories(Tutorial PRIVATE ${PROJECT_SOURCE_DIR})
     target_link_libraries(Tutorial PRIVATE rt)
-    set_target_properties(Tutorial PROPERTIES COMPILE_FLAGS ${GAIA_COMPILE_FLAGS})
-    set_target_properties(Tutorial PROPERTIES LINK_FLAGS ${GAIA_LINK_FLAGS})
+    set_target_properties(Tutorial PROPERTIES COMPILE_FLAGS ${SCRATCH_COMPILE_FLAGS})
+    set_target_properties(Tutorial PROPERTIES LINK_FLAGS ${SCRATCH_LINK_FLAGS})
 
     # Field access test.
     add_executable(TestAccess TestAccess.cpp Utils.cpp MonsterHelper.cpp)
     target_include_directories(TestAccess PRIVATE ${PROJECT_SOURCE_DIR} )
     target_link_libraries(TestAccess PRIVATE rt ${FLATBUFFERS_LIB})
-    set_target_properties(TestAccess PROPERTIES COMPILE_FLAGS ${GAIA_COMPILE_FLAGS})
-    set_target_properties(TestAccess PROPERTIES LINK_FLAGS ${GAIA_LINK_FLAGS})
+    set_target_properties(TestAccess PROPERTIES COMPILE_FLAGS ${SCRATCH_COMPILE_FLAGS})
+    set_target_properties(TestAccess PROPERTIES LINK_FLAGS ${SCRATCH_LINK_FLAGS})
 
     # Versions test.
     add_executable(TestVersions TestVersions.cpp Utils.cpp)
     target_include_directories(TestVersions PRIVATE ${PROJECT_SOURCE_DIR})
     target_link_libraries(TestVersions PRIVATE rt)
-    set_target_properties(TestVersions PROPERTIES COMPILE_FLAGS ${GAIA_COMPILE_FLAGS})
-    set_target_properties(TestVersions PROPERTIES LINK_FLAGS ${GAIA_LINK_FLAGS})
+    set_target_properties(TestVersions PROPERTIES COMPILE_FLAGS ${SCRATCH_COMPILE_FLAGS})
+    set_target_properties(TestVersions PROPERTIES LINK_FLAGS ${SCRATCH_LINK_FLAGS})
 
     # Advanced features test.
     add_executable(TestAdvanced TestAdvanced.cpp Utils.cpp MonsterHelper.cpp)
     target_include_directories(TestAdvanced PRIVATE ${PROJECT_SOURCE_DIR})
     target_link_libraries(TestAdvanced PRIVATE rt)
-    set_target_properties(TestAdvanced PROPERTIES COMPILE_FLAGS ${GAIA_COMPILE_FLAGS})
-    set_target_properties(TestAdvanced PROPERTIES LINK_FLAGS ${GAIA_LINK_FLAGS})
+    set_target_properties(TestAdvanced PROPERTIES COMPILE_FLAGS ${SCRATCH_COMPILE_FLAGS})
+    set_target_properties(TestAdvanced PROPERTIES LINK_FLAGS ${SCRATCH_LINK_FLAGS})
 
     # Record test.
     add_executable(TestRecord TestRecord.cpp)
     target_include_directories(TestRecord PRIVATE ${PROJECT_SOURCE_DIR})
     target_link_libraries(TestRecord PRIVATE rt)
-    set_target_properties(TestRecord PROPERTIES COMPILE_FLAGS ${GAIA_COMPILE_FLAGS})
-    set_target_properties(TestRecord PROPERTIES LINK_FLAGS ${GAIA_LINK_FLAGS})
+    set_target_properties(TestRecord PROPERTIES COMPILE_FLAGS ${SCRATCH_COMPILE_FLAGS})
+    set_target_properties(TestRecord PROPERTIES LINK_FLAGS ${SCRATCH_LINK_FLAGS})
 
     # Copy binary file required for Tutorial.
     configure_file(generated/monster_data.bin . COPYONLY)
@@ -76,8 +76,8 @@ else()
     add_executable(Tutorial_C Tutorial.c)
     target_include_directories(Tutorial_C PRIVATE ${PROJECT_SOURCE_DIR})
     target_link_libraries(Tutorial_C PRIVATE rt flatccrt)
-    set_target_properties(Tutorial_C PROPERTIES COMPILE_FLAGS ${GAIA_COMPILE_FLAGS})
-    set_target_properties(Tutorial_C PROPERTIES LINK_FLAGS ${GAIA_LINK_FLAGS})
+    set_target_properties(Tutorial_C PROPERTIES COMPILE_FLAGS ${SCRATCH_COMPILE_FLAGS})
+    set_target_properties(Tutorial_C PROPERTIES LINK_FLAGS ${SCRATCH_LINK_FLAGS})
 
     add_test(NAME test_flatbuffers_tutorial_c COMMAND Tutorial_C)
 endif ()

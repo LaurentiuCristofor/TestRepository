@@ -18,8 +18,8 @@ add_library(native_hello_world SHARED HelloWorld.cpp)
 target_include_directories(native_hello_world PRIVATE ${PROJECT_BINARY_DIR})
 target_include_directories(native_hello_world PRIVATE ${JNI_INCLUDE_DIRS})
 target_link_libraries(native_hello_world PRIVATE hello_world_jni_headers)
-set_target_properties(native_hello_world PROPERTIES COMPILE_FLAGS "${GAIA_COMPILE_FLAGS}")
-set_target_properties(native_hello_world PROPERTIES LINK_FLAGS "${GAIA_LINK_FLAGS}")
+set_target_properties(native_hello_world PROPERTIES COMPILE_FLAGS "${SCRATCH_COMPILE_FLAGS}")
+set_target_properties(native_hello_world PROPERTIES LINK_FLAGS "${SCRATCH_LINK_FLAGS}")
 
 # Add a test that executes the Java program.
 add_test(NAME test_jni_hello_world COMMAND ${Java_JAVA_EXECUTABLE} -Djava.library.path=. -cp ${HELLO_WORLD_JAR} HelloWorld)

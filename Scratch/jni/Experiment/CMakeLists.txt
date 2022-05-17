@@ -22,8 +22,8 @@ add_library(native_experiment SHARED Experiment.cpp)
 target_include_directories(native_experiment PRIVATE ${PROJECT_BINARY_DIR})
 target_include_directories(native_experiment PRIVATE ${JNI_INCLUDE_DIRS})
 target_link_libraries(native_experiment PRIVATE experiment_jni_headers)
-set_target_properties(native_experiment PROPERTIES COMPILE_FLAGS "${GAIA_COMPILE_FLAGS}")
-set_target_properties(native_experiment PROPERTIES LINK_FLAGS "${GAIA_LINK_FLAGS}")
+set_target_properties(native_experiment PROPERTIES COMPILE_FLAGS "${SCRATCH_COMPILE_FLAGS}")
+set_target_properties(native_experiment PROPERTIES LINK_FLAGS "${SCRATCH_LINK_FLAGS}")
 
 # Add a test that executes the Java program.
 add_test(NAME test_jni_experiment COMMAND ${Java_JAVA_EXECUTABLE} -Djava.library.path=. -cp ${EXPERIMENT_JAR} Experiment)
