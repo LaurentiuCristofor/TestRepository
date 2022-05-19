@@ -7,49 +7,43 @@
 #include <iostream>
 
 #include "Constants.hpp"
-#include "RetailAssert.hpp"
+#include "Assert.hpp"
 
 using namespace std;
 using namespace LaurentiuCristofor;
 
-void TestRetailAssert();
+void TestAssert();
 
 int main()
 {
-    TestRetailAssert();
+    TestAssert();
 
     cout << endl << AllTestsPassed << endl;
 }
 
-void TestRetailAssert()
+void TestAssert()
 {
     cout << endl << DebugOutputSeparatorLineStart << endl;
-    cout << "*** RetailAssert tests started ***" << endl;
+    cout << "*** ASSERT tests started ***" << endl;
     cout << DebugOutputSeparatorLineEnd << endl;
 
-    try
-    {
-        RetailAssert(true, "Unexpected triggering of retail assert!");
-    }
-    catch(const std::exception& e)
-    {
-        cout << "ERROR: An unexpected exception was thrown!" << endl;
-        cerr << "ERROR: Exception message: " << e.what() << '\n';
-    }
+    ASSERT(true, "Unexpected triggering of retail assert!");
 
-    cout << "PASSED: No exception was thrown by RetailAssert on a true condition!" << endl;
+    cout << "PASSED: No exception was thrown by ASSERT on a true condition!" << endl;
 
     try
     {
-        RetailAssert(false, "Expected triggering of retail assert.");
+        ASSERT(false, "Expected triggering of retail assert.");
+        cout << "FAILED: An exception was not thrown by ASSERT on a false condition, as expected." << endl;
+        exit(1);
     }
     catch(const std::exception& e)
     {
-        cout << "PASSED: An exception was thrown by RetailAssert on a false condition, as expected." << endl;
+        cout << "PASSED: An exception was thrown by ASSERT on a false condition, as expected." << endl;
         cerr << "PASSED: Exception message: " << e.what() << '\n';
     }
 
     cout << endl << DebugOutputSeparatorLineStart << endl;
-    cout << "*** RetailAssert tests ended ***" << endl;
+    cout << "*** ASSERT tests ended ***" << endl;
     cout << DebugOutputSeparatorLineEnd << endl;
 }

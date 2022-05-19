@@ -12,10 +12,10 @@
 namespace LaurentiuCristofor
 {
 
-class RetailAssertException : public std::exception
+class AssertionFailure : public std::exception
 {
 public:
-    RetailAssertException(std::string message)
+    AssertionFailure(std::string message)
     {
         m_message = message;
     }

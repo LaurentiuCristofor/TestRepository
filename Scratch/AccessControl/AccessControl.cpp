@@ -7,7 +7,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "RetailAssert.hpp"
+#include "Assert.hpp"
 #include "AccessControl.hpp"
 
 using namespace LaurentiuCristofor;
@@ -32,8 +32,8 @@ void CAutoAccessControl::Clear()
 
 void CAutoAccessControl::MarkAccess(AccessControl* pAccessControl)
 {
-    RetailAssert(pAccessControl != nullptr, "No access control was provided!");
-    RetailAssert(pAccessControl->readersCount != UINT32_MAX, "Readers count has maxed up and will overflow!");
+    ASSERT(pAccessControl != nullptr, "No access control was provided!");
+    ASSERT(pAccessControl->readersCount != UINT32_MAX, "Readers count has maxed up and will overflow!");
 
     ReleaseAccess();
 
@@ -48,7 +48,7 @@ bool CAutoAccessControl::TryToLockAccess(
     EAccessLockType wantedAccess,
     EAccessLockType& existingAccess)
 {
-    RetailAssert(wantedAccess != alt_None, "Invalid wanted access!");
+    ASSERT(wantedAccess != alt_None, "Invalid wanted access!");
 
     MarkAccess(pAccessControl);
 
@@ -70,8 +70,8 @@ bool CAutoAccessControl::TryToLockAccess(
     EAccessLockType wantedAccess,
     EAccessLockType& existingAccess)
 {
-    RetailAssert(m_pAccessControl != nullptr, "Invalid call, no access control available!");
-    RetailAssert(wantedAccess != alt_None, "Invalid wanted access!");
+    ASSERT(m_pAccessControl != nullptr, "Invalid call, no access control available!");
+    ASSERT(wantedAccess != alt_None, "Invalid wanted access!");
 
     if (m_hasLockedAccess)
     {
@@ -119,7 +119,7 @@ void CAutoAccessControl::ReleaseAccessLock()
 
     if (m_hasLockedAccess)
     {
-        RetailAssert(
+        ASSERT(
             __sync_bool_compare_and_swap(&m_pAccessControl->accessLock, m_lockedAccess, alt_None),
             "Failed to release access lock!");
         m_hasLockedAccess = false;

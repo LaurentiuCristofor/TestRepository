@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include "Constants.hpp"
-#include "RetailAssert.hpp"
+#include "Assert.hpp"
 #include "AccessControl.hpp"
 
 using namespace std;
@@ -37,48 +37,48 @@ void TestAccessControl()
     {
         CAutoAccessControl autoAccess;
 
-        RetailAssert(
+        ASSERT(
             autoAccess.TryToLockAccess(&accessControl, alt_Remove),
             "ERROR: Auto accessor failed to acquire available access!");
-        RetailAssert(
+        ASSERT(
             accessControl.accessLock == alt_Remove,
             "ERROR: Access control does not indicate expected alt_Remove value!");
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: First call of TryToLockAccess() has succeeded as expected!" << endl;
 
-        RetailAssert(
+        ASSERT(
             autoAccess.TryToLockAccess(&accessControl, alt_Update),
             "ERROR: Auto accessor failed to release and reacquire available access!");
-        RetailAssert(
+        ASSERT(
             accessControl.accessLock == alt_Update,
             "ERROR: Access control does not indicate expected alt_Update value!");
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: Second call of TryToLockAccess() has succeeded as expected!" << endl;
 
         CAutoAccessControl secondAutoAccess;
 
-        RetailAssert(
+        ASSERT(
             !secondAutoAccess.TryToLockAccess(&accessControl, alt_Remove, existingAccess),
             "ERROR: Auto accessor managed to acquire already granted access!");
-        RetailAssert(
+        ASSERT(
             existingAccess == alt_Update,
             "ERROR: Unexpected existing access was returned!");
         cout << "PASSED: Cannot re-lock existing locked access!" << endl;
 
-        RetailAssert(
+        ASSERT(
             secondAutoAccess.TryToLockAccess(&secondAccessControl, alt_Remove, existingAccess),
             "ERROR: Auto accessor failed to acquire available access!");
-        RetailAssert(
+        ASSERT(
             secondAccessControl.accessLock == alt_Remove,
             "ERROR: Access control does not indicate expected alt_Remove value!");
-        RetailAssert(
+        ASSERT(
             secondAccessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
-        RetailAssert(
+        ASSERT(
             existingAccess == alt_None,
             "ERROR: Unexpected existing access was returned!");
         cout << "PASSED: Can lock different unlocked access!" << endl;
@@ -86,31 +86,31 @@ void TestAccessControl()
         CAutoAccessControl thirdAutoAccess;
 
         thirdAutoAccess.MarkAccess(&accessControl);
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 2,
             "ERROR: Access control does not indicate expected reader count value of 2!");
         cout << "PASSED: Can mark access on locked control!" << endl;
 
         thirdAutoAccess.MarkAccess(&secondAccessControl);
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
-        RetailAssert(
+        ASSERT(
             secondAccessControl.readersCount == 2,
             "ERROR: Access control does not indicate expected reader count value of 2!");
         cout << "PASSED: Can release and mark access on different locked control!" << endl;
     }
 
-    RetailAssert(
+    ASSERT(
         accessControl.accessLock == alt_None,
         "ERROR: Access control has not reverted to expected alt_None value!");
-    RetailAssert(
+    ASSERT(
         accessControl.readersCount == 0,
         "ERROR: Access control does not indicate expected reader count value of 0!");
-    RetailAssert(
+    ASSERT(
         secondAccessControl.accessLock == alt_None,
         "ERROR: Access control has not reverted to expected alt_None value!");
-    RetailAssert(
+    ASSERT(
         accessControl.readersCount == 0,
         "ERROR: Access control does not indicate expected reader count value of 0!");
 
@@ -118,60 +118,60 @@ void TestAccessControl()
         CAutoAccessControl autoAccess;
 
         autoAccess.MarkAccess(&accessControl);
-        RetailAssert(
+        ASSERT(
             accessControl.accessLock == alt_None,
             "ERROR: Access control does not indicate expected alt_None value!");
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: MarkAccess() has succeeded as expected!" << endl;
 
-        RetailAssert(
+        ASSERT(
             autoAccess.TryToLockAccess(alt_Remove),
             "ERROR: Auto accessor failed to acquire available access!");
-        RetailAssert(
+        ASSERT(
             accessControl.accessLock == alt_Remove,
             "ERROR: Access control does not indicate expected alt_Remove value!");
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: TryToLockAccess() has succeeded as expected!" << endl;
 
         autoAccess.ReleaseAccess();
-        RetailAssert(
+        ASSERT(
             accessControl.accessLock == alt_None,
             "ERROR: Access control does not indicate expected alt_None value!");
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 0,
             "ERROR: Access control does not indicate expected reader count value of 0!");
         cout << "PASSED: ReleaseAccess() has succeeded as expected!" << endl;
 
         // Re-acquire access lock so we can test releasing lock only.
-        RetailAssert(
+        ASSERT(
             autoAccess.TryToLockAccess(&accessControl, alt_Remove),
             "ERROR: Auto accessor failed to acquire available access!");
-        RetailAssert(
+        ASSERT(
             accessControl.accessLock == alt_Remove,
             "ERROR: Access control does not indicate expected alt_Remove value!");
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: TryToLockAccess() has succeeded as expected!" << endl;
 
         autoAccess.ReleaseAccessLock();
-        RetailAssert(
+        ASSERT(
             accessControl.accessLock == alt_None,
             "ERROR: Access control does not indicate expected alt_None value!");
-        RetailAssert(
+        ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: ReleaseAccessLock() has succeeded as expected!" << endl;
     }
 
-    RetailAssert(
+    ASSERT(
         accessControl.accessLock == alt_None,
         "ERROR: Access control has not reverted to expected alt_None value!");
-    RetailAssert(
+    ASSERT(
         accessControl.readersCount == 0,
         "ERROR: Access control does not indicate expected reader count value of 0!");
 
