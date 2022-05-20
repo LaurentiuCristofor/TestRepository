@@ -1,5 +1,18 @@
 # Experiments
 
+## Build instructions
+
+You can build these folders with the following steps:
+
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+
+You can run the unit tests using `ctest` after performing a successful build.
+
 ## Folder descriptions
 
 * **AccessControl** contains some experimental synchronization code.
