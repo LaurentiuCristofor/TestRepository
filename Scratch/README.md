@@ -20,3 +20,4 @@ You can run the unit tests using `ctest` after performing a successful build.
 * **atomic** contains some code that tests the performance of atomic functions.
 * **flatbuffers** contains various demos and tests of flatbuffers functionality.
 * **jni** contains demos of how to interface Java and C++ via JNI.
+* **LanguageTests** contains ad-hoc tests of various C++/Java language features.

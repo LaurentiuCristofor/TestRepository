@@ -4,8 +4,6 @@
 ### Do not use it if you have not received an associated LICENSE file.
 ####################################################################################################
 
-cmake_minimum_required(VERSION 3.11)
-
 # Set the project name.
 project(flatbuffers)
 

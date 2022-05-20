@@ -5,10 +5,7 @@
 ####################################################################################################
 
 # Set the project name.
-project(atomic)
+project(TestC++)
 
-# Our main target.
-add_executable(atomic atomic.cpp)
-target_link_libraries(atomic PRIVATE rt)
-set_target_properties(atomic PROPERTIES COMPILE_FLAGS "${ATOMIC_COMPILE_FLAGS}")
-set_target_properties(atomic PROPERTIES LINK_FLAGS "${ATOMIC_LINK_FLAGS}")
+# Our unit tests.
+add_executable(TestC++ TestC++.cpp)

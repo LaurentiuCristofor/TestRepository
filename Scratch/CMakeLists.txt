@@ -4,7 +4,7 @@
 ### Do not use it if you have not received an associated LICENSE file.
 ####################################################################################################
 
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.10)
 
 enable_testing()
 
@@ -21,10 +21,11 @@ set(SCRATCH_LINK_FLAGS "-ggdb -pthread")
 
 # Add individual folders.
 add_subdirectory(AccessControl)
+add_subdirectory(airport)
 add_subdirectory(atomic)
 add_subdirectory(flatbuffers)
 add_subdirectory(jni)
-add_subdirectory(airport)
+add_subdirectory(LanguageTests)
 
 # Helper function for setting up our tests.
 function(set_test target arg result)
@@ -38,4 +39,3 @@ set(TEST_SUCCESS "All tests passed!")
 # Common tests.
 set_test(TestRetailAssert 0 ${TEST_SUCCESS})
 set_test(TestAccessControl 0 ${TEST_SUCCESS})
-
