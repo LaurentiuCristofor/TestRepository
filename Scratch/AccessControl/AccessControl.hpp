@@ -10,7 +10,7 @@ namespace LaurentiuCristofor
 {
 
 // Values that can indicate the access desired for resources.
-enum EAccessLockType
+enum EAccessLockType : int8_t
 {
     alt_None = 0,
 
@@ -53,14 +53,14 @@ struct AccessControl
 //
 class CAutoAccessControl
 {
-    private:
+private:
 
     AccessControl* m_pAccessControl;
     EAccessLockType m_lockedAccess;
     bool m_hasMarkedAccess;
     bool m_hasLockedAccess;
 
-    public:
+public:
 
     CAutoAccessControl();
     ~CAutoAccessControl();
@@ -88,7 +88,7 @@ class CAutoAccessControl
         return m_hasLockedAccess;
     }
 
-    private:
+private:
 
     void Clear();
 };

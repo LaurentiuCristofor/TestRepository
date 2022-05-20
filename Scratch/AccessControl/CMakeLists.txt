@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.10)
 project(AccessControl)
 
 # Our main target.
-add_library(AccessControl SHARED AccessControl.cpp)
+add_library(AccessControl SHARED AccessControl.cpp MemoryList.cpp)
 target_include_directories(AccessControl PUBLIC ${PROJECT_SOURCE_DIR})
 set_target_properties(AccessControl PROPERTIES COMPILE_FLAGS "${SCRATCH_COMPILE_FLAGS}")
 
