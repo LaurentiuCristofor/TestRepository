@@ -106,9 +106,9 @@ void CMemoryList::ResetCurrent(IterationContext& context) const
     }
 }
 
-bool CMemoryList::TryToLockAccess(IterationContext& context, EAccessLockType wantedAccess, EAccessLockType& existingAccess) const
+bool CMemoryList::TryToLockAccess(IterationContext& context, AccessType wantedAccess, AccessType& existingAccess) const
 {
-    ASSERT(wantedAccess != alt_Remove, "A Remove lock should never be taken on previous record - use UpdateRemove instead!");
+    ASSERT(wantedAccess != AccessType::Remove, "A Remove lock should never be taken on previous record - use UpdateRemove instead!");
     ASSERT(context.pPreviousRecord != nullptr, "Previous record cannot be null!");
     ASSERT(context.autoAccessPreviousRecord.HasMarkedAccess(), "Access to previous record has not been marked yet!");
     ASSERT(!context.autoAccessPreviousRecord.HasLockedAccess(), "Access to previous record has been locked already!");
@@ -122,7 +122,7 @@ bool CMemoryList::TryToLockAccess(IterationContext& context, EAccessLockType wan
     // so we need to check if the link between the two records still holds.
     // If the link is broken, there is no point in maintaining the lock further,
     // but we'll leave the access mark because that is managed by our caller.
-    if (wantedAccess != alt_Insert
+    if (wantedAccess != AccessType::Insert
         && context.pCurrentRecord != ReadRecord(context.pPreviousRecord->next))
     {
         context.autoAccessPreviousRecord.ReleaseAccessLock();
@@ -132,9 +132,9 @@ bool CMemoryList::TryToLockAccess(IterationContext& context, EAccessLockType wan
     return true;
 }
 
-bool CMemoryList::TryToLockAccess(IterationContext& context, EAccessLockType wantedAccess) const
+bool CMemoryList::TryToLockAccess(IterationContext& context, AccessType wantedAccess) const
 {
-    EAccessLockType existingAccess;
+    AccessType existingAccess;
 
     return TryToLockAccess(context, wantedAccess, existingAccess);
 }
@@ -197,7 +197,7 @@ void CMemoryList::InsertListNode(ListNode* pListHead, ListNode* pListNode) const
         IterationContext context;
         Start(pListHead, context);
         bool foundInsertionPlace = false;
-        EAccessLockType existingAccess = alt_None;
+        AccessType existingAccess = AccessType::None;
 
         // Insert record in its proper place in the list,
         // based on any criteria around its payload value.
@@ -211,14 +211,14 @@ void CMemoryList::InsertListNode(ListNode* pListHead, ListNode* pListNode) const
             {
                 foundInsertionPlace = true;
 
-                if (TryToLockAccess(context, alt_Insert, existingAccess))
+                if (TryToLockAccess(context, AccessType::Insert, existingAccess))
                 {
                     Insert(context, pListNode);
 
                     // We're done!
                     return;
                 }
-                else if (existingAccess == alt_Remove)
+                else if (existingAccess == AccessType::Remove)
                 {
                     // We have to restart from the beginning of the list
                     // because our previous record is being deleted.
@@ -261,8 +261,8 @@ void CMemoryList::SearchUpdateExample()
             // because another thread may have managed to update it before we could lock it.
             if (context.pCurrentRecord->payload == requestedPayload)
             {
-                if (TryToLockAccess(context, alt_UpdateRemove)
-                    && context.autoAccessCurrentRecord.TryToLockAccess(alt_Remove)
+                if (TryToLockAccess(context, AccessType::UpdateRemove)
+                    && context.autoAccessCurrentRecord.TryToLockAccess(AccessType::Remove)
                     && context.pCurrentRecord->payload == requestedPayload)
                 {
                     ASSERT(
@@ -281,7 +281,7 @@ void CMemoryList::SearchUpdateExample()
             }
             else
             {
-                if (TryToLockAccess(context, alt_Update)
+                if (TryToLockAccess(context, AccessType::Update)
                     && context.pCurrentRecord->payload > requestedPayload)
                 {
                     ASSERT(
@@ -316,8 +316,8 @@ void CMemoryList::RemovalExample()
         // enough nodes will get inserted into this list that we'll succeed easily to remove one.
         //
         // We'll try to lock each node one after the other.
-        if (TryToLockAccess(context, alt_UpdateRemove)
-            && context.autoAccessCurrentRecord.TryToLockAccess(alt_Remove))
+        if (TryToLockAccess(context, AccessType::UpdateRemove)
+            && context.autoAccessCurrentRecord.TryToLockAccess(AccessType::Remove))
         {
             Remove(context);
 
@@ -341,7 +341,7 @@ void CMemoryList::InsertionExample()
     // We'll keep trying to insert at the beginning of the list.
     while (true)
     {
-        if (TryToLockAccess(context, alt_Insert))
+        if (TryToLockAccess(context, AccessType::Insert))
         {
             Insert(context, pRecord);
 

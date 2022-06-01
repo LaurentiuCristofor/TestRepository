@@ -32,28 +32,28 @@ void TestAccessControl()
 
     AccessControl accessControl;
     AccessControl secondAccessControl;
-    EAccessLockType existingAccess;
+    AccessType existingAccess;
 
     {
         CAutoAccessControl autoAccess;
 
         ASSERT(
-            autoAccess.TryToLockAccess(&accessControl, alt_Remove),
+            autoAccess.TryToLockAccess(&accessControl, AccessType::Remove),
             "ERROR: Auto accessor failed to acquire available access!");
         ASSERT(
-            accessControl.accessLock == alt_Remove,
-            "ERROR: Access control does not indicate expected alt_Remove value!");
+            accessControl.accessLock == AccessType::Remove,
+            "ERROR: Access control does not indicate expected AccessType::Remove value!");
         ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: First call of TryToLockAccess() has succeeded as expected!" << endl;
 
         ASSERT(
-            autoAccess.TryToLockAccess(&accessControl, alt_Update),
+            autoAccess.TryToLockAccess(&accessControl, AccessType::Update),
             "ERROR: Auto accessor failed to release and reacquire available access!");
         ASSERT(
-            accessControl.accessLock == alt_Update,
-            "ERROR: Access control does not indicate expected alt_Update value!");
+            accessControl.accessLock == AccessType::Update,
+            "ERROR: Access control does not indicate expected AccessType::Update value!");
         ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
@@ -62,24 +62,24 @@ void TestAccessControl()
         CAutoAccessControl secondAutoAccess;
 
         ASSERT(
-            !secondAutoAccess.TryToLockAccess(&accessControl, alt_Remove, existingAccess),
+            !secondAutoAccess.TryToLockAccess(&accessControl, AccessType::Remove, existingAccess),
             "ERROR: Auto accessor managed to acquire already granted access!");
         ASSERT(
-            existingAccess == alt_Update,
+            existingAccess == AccessType::Update,
             "ERROR: Unexpected existing access was returned!");
         cout << "PASSED: Cannot re-lock existing locked access!" << endl;
 
         ASSERT(
-            secondAutoAccess.TryToLockAccess(&secondAccessControl, alt_Remove, existingAccess),
+            secondAutoAccess.TryToLockAccess(&secondAccessControl, AccessType::Remove, existingAccess),
             "ERROR: Auto accessor failed to acquire available access!");
         ASSERT(
-            secondAccessControl.accessLock == alt_Remove,
-            "ERROR: Access control does not indicate expected alt_Remove value!");
+            secondAccessControl.accessLock == AccessType::Remove,
+            "ERROR: Access control does not indicate expected AccessType::Remove value!");
         ASSERT(
             secondAccessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         ASSERT(
-            existingAccess == alt_None,
+            existingAccess == AccessType::None,
             "ERROR: Unexpected existing access was returned!");
         cout << "PASSED: Can lock different unlocked access!" << endl;
 
@@ -102,14 +102,14 @@ void TestAccessControl()
     }
 
     ASSERT(
-        accessControl.accessLock == alt_None,
-        "ERROR: Access control has not reverted to expected alt_None value!");
+        accessControl.accessLock == AccessType::None,
+        "ERROR: Access control has not reverted to expected AccessType::None value!");
     ASSERT(
         accessControl.readersCount == 0,
         "ERROR: Access control does not indicate expected reader count value of 0!");
     ASSERT(
-        secondAccessControl.accessLock == alt_None,
-        "ERROR: Access control has not reverted to expected alt_None value!");
+        secondAccessControl.accessLock == AccessType::None,
+        "ERROR: Access control has not reverted to expected AccessType::None value!");
     ASSERT(
         accessControl.readersCount == 0,
         "ERROR: Access control does not indicate expected reader count value of 0!");
@@ -119,19 +119,19 @@ void TestAccessControl()
 
         autoAccess.MarkAccess(&accessControl);
         ASSERT(
-            accessControl.accessLock == alt_None,
-            "ERROR: Access control does not indicate expected alt_None value!");
+            accessControl.accessLock == AccessType::None,
+            "ERROR: Access control does not indicate expected AccessType::None value!");
         ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
         cout << "PASSED: MarkAccess() has succeeded as expected!" << endl;
 
         ASSERT(
-            autoAccess.TryToLockAccess(alt_Remove),
+            autoAccess.TryToLockAccess(AccessType::Remove),
             "ERROR: Auto accessor failed to acquire available access!");
         ASSERT(
-            accessControl.accessLock == alt_Remove,
-            "ERROR: Access control does not indicate expected alt_Remove value!");
+            accessControl.accessLock == AccessType::Remove,
+            "ERROR: Access control does not indicate expected AccessType::Remove value!");
         ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
@@ -139,8 +139,8 @@ void TestAccessControl()
 
         autoAccess.ReleaseAccess();
         ASSERT(
-            accessControl.accessLock == alt_None,
-            "ERROR: Access control does not indicate expected alt_None value!");
+            accessControl.accessLock == AccessType::None,
+            "ERROR: Access control does not indicate expected AccessType::None value!");
         ASSERT(
             accessControl.readersCount == 0,
             "ERROR: Access control does not indicate expected reader count value of 0!");
@@ -148,11 +148,11 @@ void TestAccessControl()
 
         // Re-acquire access lock so we can test releasing lock only.
         ASSERT(
-            autoAccess.TryToLockAccess(&accessControl, alt_Remove),
+            autoAccess.TryToLockAccess(&accessControl, AccessType::Remove),
             "ERROR: Auto accessor failed to acquire available access!");
         ASSERT(
-            accessControl.accessLock == alt_Remove,
-            "ERROR: Access control does not indicate expected alt_Remove value!");
+            accessControl.accessLock == AccessType::Remove,
+            "ERROR: Access control does not indicate expected AccessType::Remove value!");
         ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
@@ -160,8 +160,8 @@ void TestAccessControl()
 
         autoAccess.ReleaseAccessLock();
         ASSERT(
-            accessControl.accessLock == alt_None,
-            "ERROR: Access control does not indicate expected alt_None value!");
+            accessControl.accessLock == AccessType::None,
+            "ERROR: Access control does not indicate expected AccessType::None value!");
         ASSERT(
             accessControl.readersCount == 1,
             "ERROR: Access control does not indicate expected reader count value of 1!");
@@ -169,8 +169,8 @@ void TestAccessControl()
     }
 
     ASSERT(
-        accessControl.accessLock == alt_None,
-        "ERROR: Access control has not reverted to expected alt_None value!");
+        accessControl.accessLock == AccessType::None,
+        "ERROR: Access control has not reverted to expected AccessType::None value!");
     ASSERT(
         accessControl.readersCount == 0,
         "ERROR: Access control does not indicate expected reader count value of 0!");

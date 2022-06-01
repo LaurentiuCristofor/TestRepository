@@ -25,7 +25,7 @@ CAutoAccessControl::~CAutoAccessControl()
 void CAutoAccessControl::Clear()
 {
     m_pAccessControl = nullptr;
-    m_lockedAccess = alt_None;
+    m_lockedAccess = AccessType::None;
     m_hasMarkedAccess = false;
     m_hasLockedAccess = false;
 }
@@ -46,8 +46,8 @@ void CAutoAccessControl::MarkAccess(
 
 bool CAutoAccessControl::TryToLockAccess(
     AccessControl* pAccessControl,
-    EAccessLockType wantedAccess,
-    EAccessLockType& existingAccess)
+    AccessType wantedAccess,
+    AccessType& existingAccess)
 {
     MarkAccess(pAccessControl);
 
@@ -56,19 +56,19 @@ bool CAutoAccessControl::TryToLockAccess(
 
 bool CAutoAccessControl::TryToLockAccess(
     AccessControl* pAccessControl,
-    EAccessLockType wantedAccess)
+    AccessType wantedAccess)
 {
-    EAccessLockType existingAccess;
+    AccessType existingAccess;
 
     return TryToLockAccess(pAccessControl, wantedAccess, existingAccess);
 }
 
 bool CAutoAccessControl::TryToLockAccess(
-    EAccessLockType wantedAccess,
-    EAccessLockType& existingAccess)
+    AccessType wantedAccess,
+    AccessType& existingAccess)
 {
     ASSERT(m_pAccessControl != nullptr, "Invalid call, no access control available!");
-    ASSERT(wantedAccess != alt_None, "Invalid wanted access!");
+    ASSERT(wantedAccess != AccessType::None, "Invalid wanted access!");
 
     existingAccess = m_pAccessControl->accessLock;
 
@@ -77,11 +77,11 @@ bool CAutoAccessControl::TryToLockAccess(
         return m_lockedAccess == wantedAccess;
     }
 
-    existingAccess = static_cast<EAccessLockType>(__sync_val_compare_and_swap(
+    existingAccess = static_cast<AccessType>(__sync_val_compare_and_swap(
         reinterpret_cast<int8_t*>(&m_pAccessControl->accessLock),
-        static_cast<int8_t>(alt_None),
+        static_cast<int8_t>(AccessType::None),
         static_cast<int8_t>(wantedAccess)));
-    m_hasLockedAccess = (existingAccess == alt_None);
+    m_hasLockedAccess = (existingAccess == AccessType::None);
     if (m_hasLockedAccess)
     {
         m_lockedAccess = wantedAccess;
@@ -91,9 +91,9 @@ bool CAutoAccessControl::TryToLockAccess(
 }
 
 bool CAutoAccessControl::TryToLockAccess(
-    EAccessLockType wantedAccess)
+    AccessType wantedAccess)
 {
-    EAccessLockType existingAccess;
+    AccessType existingAccess;
 
     return TryToLockAccess(wantedAccess, existingAccess);
 }
@@ -129,10 +129,10 @@ void CAutoAccessControl::ReleaseAccessLock()
             __sync_bool_compare_and_swap(
                 reinterpret_cast<int8_t*>(&m_pAccessControl->accessLock),
                 static_cast<int8_t>(m_lockedAccess),
-                static_cast<int8_t>(alt_None)),
+                static_cast<int8_t>(AccessType::None)),
             "Failed to release access lock!");
         m_hasLockedAccess = false;
     }
 
-    m_lockedAccess = alt_None;
+    m_lockedAccess = AccessType::None;
 }

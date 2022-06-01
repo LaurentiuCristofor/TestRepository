@@ -48,9 +48,9 @@ public:
     // because the operation impacts two links.
     //
     // Returns true if access was acquired and false otherwise.
-    bool TryToLockAccess(IterationContext& context, EAccessLockType wantedAccess, EAccessLockType& existingAccess) const;
+    bool TryToLockAccess(IterationContext& context, AccessType wantedAccess, AccessType& existingAccess) const;
 
-    bool TryToLockAccess(IterationContext& context, EAccessLockType wantedAccess) const;
+    bool TryToLockAccess(IterationContext& context, AccessType wantedAccess) const;
 
     // Removes the current record from the list.
     // Assumes that both records have already had their access locked.

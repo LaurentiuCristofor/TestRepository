@@ -10,21 +10,21 @@ namespace LaurentiuCristofor
 {
 
 // Values that can indicate the access desired for resources.
-enum EAccessLockType : int8_t
+enum class AccessType : int8_t
 {
-    alt_None = 0,
+    None = 0,
 
-    alt_Read = 1,
-    alt_Insert = 2,
-    alt_Update = 3,
-    alt_UpdateRemove = 4,
-    alt_Remove = 5,
+    Read = 1,
+    Insert = 2,
+    Update = 3,
+    UpdateRemove = 4,
+    Remove = 5,
 };
 
 struct AccessControl
 {
     uint32_t readersCount;
-    EAccessLockType accessLock;
+    AccessType accessLock;
 
     AccessControl()
     {
@@ -34,7 +34,7 @@ struct AccessControl
     void Clear()
     {
         readersCount = 0;
-        accessLock = alt_None;
+        accessLock = AccessType::None;
     }
 };
 
@@ -56,7 +56,7 @@ class CAutoAccessControl
 private:
 
     AccessControl* m_pAccessControl;
-    EAccessLockType m_lockedAccess;
+    AccessType m_lockedAccess;
     bool m_hasMarkedAccess;
     bool m_hasLockedAccess;
 
@@ -67,12 +67,12 @@ public:
 
     void MarkAccess(AccessControl* pAccessControl);
 
-    bool TryToLockAccess(AccessControl* pAccessControl, EAccessLockType wantedAccess, EAccessLockType& existingAccess);
-    bool TryToLockAccess(AccessControl* pAccessControl, EAccessLockType wantedAccess);
+    bool TryToLockAccess(AccessControl* pAccessControl, AccessType wantedAccess, AccessType& existingAccess);
+    bool TryToLockAccess(AccessControl* pAccessControl, AccessType wantedAccess);
 
     // These versions can be called after an initial MarkAccess call.
-    bool TryToLockAccess(EAccessLockType wantedAccess, EAccessLockType& existingAccess);
-    bool TryToLockAccess(EAccessLockType wantedAccess);
+    bool TryToLockAccess(AccessType wantedAccess, AccessType& existingAccess);
+    bool TryToLockAccess(AccessType wantedAccess);
 
     // Methods for releasing all access or just the access lock.
     void ReleaseAccess();
