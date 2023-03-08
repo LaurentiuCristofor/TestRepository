@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>How this ebook was edited</title>
+  <link href="../styles/stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <h1 id="introduction">Introduction</h1>
+
+  <p>This ebook is meant to provide a basic introduction to how to create and edit a new ebook by using this one as a template and editing it. This ebook also provides an example of a <i>reflowable</i> ebook: its formatting is not fixed and should nicely adapt to many screen sizes. The main target of this ebook is Amazon's Kindle platform, so some of the choices of its coding will be driven by that. Still, I have attempted to make this book look good on any other e-reader.</p>
+  
+  <p>This ebook is built in the EPUB format, which is essentially a ZIP archive containing a bunch of HTML files. We can easily edit this content using a free tool like <i>Calibre</i>, which can be downloaded from <a href="https://calibre-ebook.com/download">https://calibre-ebook.com/download</a>. This entire ebook was edited exclusively using <i>Calibre</i>.</p>
+  
+  <p>There are three main areas that will be demonstrated in this ebook:</p>
+  
+  <ul>
+  <li>How to organize an ebook in chapters and how to index its content in a table of contents</li>
+  <li>How to format text</li>
+  <li>How to insert images</li>
+  </ul>
+  
+  <p>Knowing how to do these three things should enable you to create an ebook with your own content.</p>
+  
+  <p>If you already have content that you want to publish and that contains rich formatting, then being able to save that content in HTML format would mean that packaging it as an ebook could be just as simple as creating the right ebook structure and then inserting your HTML content into it. You may need to fix some HTML issues, but that should mostly be an easy task.</p>
+
+  <p>The easiest way to start up is by editing an existing ebook to create the files into which you will insert your content. Let's edit this very ebook.</p>
+  
+  <p>The first thing that you should edit is the ebook's metadata. This can be done by selecting the ebook in <i>Calibre</i> and then selecting the <u>Edit metadata</u> action. This will allow you to edit the title and other general information about your book. Once you are done with this editing, you can generate a new cover for your book using this information, by using the very helpful <u>Generate cover</u> action. Keep selecting this action to generate covers in different styles. Later, you can replace the generated cover with your own custom design, but the <i>Calibre</i>-generated cover will provide a nice starting point until then.</p>
+  
+  <p>At this point you should have generated an ebook whose metadata makes it look original, but whose content is everything but. To update the content, we need to select the ebook in <i>Calibre</i> and use the <u>Edit book</u> command. This will open the <i>Calibre</i> ebook editor and that will show us the content of the ebook under several categories:</p>
+  
+  <ul>
+  <li><u>Text</u> - this is the main category that will include the text content of this ebook as a set of XHTML files.</li>
+  <li><u>Styles</u> - this category includes CSS style files that customize the formatting of the XHTML pages that reference them. This ebook uses a single simple style file that is referenced by all its pages. This style file just uses CSS commands to set styling preferences: for example, to center the title of each chapter. We won't touch this file, but you can take a look at it to get an idea of what CSS looks like.</li>
+  <li><u>Images</u> - this is where all the images included in our book will appear.</li>
+  <li><u>Fonts</u> - this should be empty because we don't use any custom fonts.</li>
+  <li><u>Miscellaneous</u> - this category will list several files, the most important of which are <i>content.opf</i> and <i>toc.ncx</i>. <i>content.opf</i> contains some of our ebook metadata as well as important information about the ordering of its content. <i>toc.ncx</i> contains the internal Table of Contents of our ebook (also called "logical" Table of Contents).</li>
+  </ul>
+  
+  <p>To view or edit any of these content files, just double click them. The content will be opened in a <i>Calibre</i> editor. We will discuss editing these files in the next chapters.</p>
+
+  <p>For now, double-click on the <i>introduction.xtml</i> file to see how this chapter was generated.</p>
+  
+  <p>If you are familiar with HTML, you should find the content of this file to be quite easy to understand. If you are not familiar with HTML, I will include some quick pointers here and there are plenty more resources available online.</p>
+
+  <h2 id="HTML">Quick introduction to HTML</h2>
+    
+  <p>HTML organizes information using <i>tags</i> that are keywords enclosed between <code>&lt;</code> and <code>&gt;</code> characters. Tags come in pairs: an opening tag and a closing tag - the tag applies to the text contained in between the tag pair. For example, at the top of this file you will see the following line:
+  <br/>
+  <code>&lt;h1 id="introduction"&gt;Introduction&lt;/h1&gt;</code>
+  <br/>
+  Let's parse this line:</p>
+
+  <ul>
+  <li><code>&lt;h1&gt;</code> is an opening tag indicating that the enclosed text should be treated as <b>heading</b> of importance <b>1</b> (smaller numbers indicate higher importance, with 1 being the smallest) - in this case we emphasize the chapter's name: "Introduction". The corresponding closing tag is <code>&lt;/h1&gt;</code>.</li>
+  <li>Tags can have additional attributes specified inside them. In this instance, our heading tag has one attribute specified: <code>id="introduction"</code>, which indicates that we identify this spot in the file by the identifier "introduction". Such identifiers are helpful because they allow us to reference content buried inside large HTML files. In the following chapters, we will also see how these identifiers are used in the logical Table of Contents of our ebook. Needless to say, these identifiers need to be unique per file, otherwise they would not be very useful for identifying file content.</li>
+  </ul>
+
+  <p>So now we have seen how to read about as complex an HTML tag as we will have to deal with. Sometimes we want to have a tag without enclosing any text and this can be accomplished by using the tag name followed by a backslash: i.e. we can just write <code>&lt;br/&gt;</code> instead of <code>&lt;br&gt;&lt;/br&gt;</code>.</p>
+   
+  <p>Note that HTML is actually more lenient than XHTML and it allows some tags to be used without corresponding closing tags. For example, <code>&lt;br&gt;</code> is valid in an HTML file, but here in our XHTML files, it can cause errors, so avoid using such shortcuts. Instead, use <code>&lt;br/&gt;</code> or use a complete pair of tags.</p>
+   
+  <p>Hopefully, this quick introduction will allow you to understand the HTML source of this chapter.</p>
+
+</body>
+</html>

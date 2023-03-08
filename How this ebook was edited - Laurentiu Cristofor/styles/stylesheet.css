@@ -1,0 +1,84 @@
+/*
+  Amazon reflowable books are processed with text-align: justify as the default setting,
+  but other readers may require it being set explicitly,
+  hence it is included here.
+*/
+body {
+  page-break-before: always;
+  text-align: justify;
+}
+/*
+  Given that Amazon reflowable books are processed with text-align: justify as the default setting,
+  we need to align all headers, otherwise the justification will make them look bad.
+  
+  The margin settings are optional and just reflect our preferences.
+*/
+h1 {
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  text-align: center;
+}
+h2 {
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  text-align: center;
+}
+h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  text-align: left;
+}
+/*
+  Indent the first line of a paragraph.
+*/
+p {
+  text-indent: 2rem;
+}
+/*
+  Ensure that our tables have black borders and are centered.
+*/
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+/*
+  Center table captions and customize their style.
+*/
+caption {
+  font-style: italic;
+  font-size: 0.8rem;
+  margin: 0.3rem auto;
+  text-align: center;
+}
+/*
+  Request that images are not separated by their captions.
+*/
+figure {
+  break-inside: avoid;
+}
+/*
+  Get images centered and limit their height and width.
+*/
+img {
+  display: block;
+  margin: 0 auto;
+  max-height: 70%;
+  max-width: 70%;
+  object-fit: contain;
+}
+/*
+  Center figure captions and customize their style.
+*/
+figcaption {
+  font-style: italic;
+  font-size: 0.8rem;
+  margin: 0.3rem auto;
+  text-align: center;
+}

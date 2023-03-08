@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+  <title>How this ebook was edited</title>
+  <link href="../styles/stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <h1 id="formatting">Basic text formatting</h1>
+
+  <h2 id="formatting-h2">Also including an example of h2</h2>
+
+  <p>Note that this ebook's style centers <code>h1</code> and <code>h2</code>.</p>
+
+  <h3 id="formatting-h3">Also including an example of h3</h3>
+
+  <p><code>h3-6</code>, on the other hand, are left-justified. This is just a matter of personal preference and can be changed by updating the style file.</p>
+
+  <h4 id="formatting-h4">Also including an example of h4</h4>
+
+  <h5 id="formatting-h5">Also including an example of h5</h5>
+
+  <h6 id="formatting-h6">Also including an example of h6</h6>
+
+  <p>Formatting text is made easier by the <i>Calibre</i> editor because its toolbar provides quick access to <b>bold</b>, <i>italics</i>, <u>underlined</u>, and <span style="text-decoration: line-through">strikethrough</span>.</p>
+  
+  <p>You can include references within your ebook or to Web URLs using the <u>Insert hyperlink</u> action. For example, here's an internal reference to the <a href="toc.xhtml">Table of Contents</a> and here's an external reference to Calibre's download URL: <a href="https://calibre-ebook.com/download">https://calibre-ebook.com/download</a>.</p>
+  
+  <p>Paragraphs are created using the <code>&lt;p&gt;</code> tag. If you need a line break within a paragraph, you can use the <code>&lt;br/&gt;</code> tag.
+  <br/>
+  For example, this sentence follows a line break.</p>
+  
+  <p>If you want to provide HTML or other code examples, you can use the <code>&lt;code&gt;</code> tag. To include the <code>&lt;</code> and <code>&gt;</code> characters under the tag <code>&lt;code&gt;</code>, you should use the escape sequences <code>&amp;lt;</code> and <code>&amp;gt;</code>, respectively.</p>
+  
+  <p>This is an example of a footnote that uses the <code>epub:type</code> attribute of the <code>&lt;a&gt;</code> tag with the <code>&lt;aside&gt;</code> tag and bi-directional hyperlinks. This is the method preferred and recommended by Amazon.<sup><a id="src_fn1" href="#fn1" epub:type="noteref">[1]</a></sup> Note that to use the <code>epub:type</code> attribute, we had to add the <code>xmlns:epub="http://www.idpf.org/2007/ops"</code> attribute to the <code>&lt;html&gt;</code> of this file; this will have to be done to all files that use such footnotes. See the HTML source for the full details.</p>
+ 
+  <p>This is a second example of a footnote that just uses plain bi-directional hyperlinks without the <code>epub:type</code> attribute of the <code>&lt;a&gt;</code> tag and without the <code>&lt;aside&gt;</code> tag.<sup><a id="src_fn2" href="#fn2">[2]</a></sup> See the HTML source for the full details.</p>
+  
+  <p>Both of these footnotes could also have had their text placed in another file, towards the end of the book, but in that case, you'd have to update their <code>href</code> attributes to include the full file names, not just the location identifiers. I prefer footnotes to be collected per chapter rather than for the entire book, hence that is the approach I demonstrated here.</p>
+ 
+  <p>We have seen an example of unordered list in the Table of Contents. That list was generated using the <code>&lt;ul&gt;</code> tag. You can generate ordered lists (numbered lists) in a similar way just by changing the tag to <code>&lt;ol&gt;</code>. For example:</p>
+  
+  <ol>
+  <li>First ordered list item.</li>
+  <li>Second ordered list item.</li>
+  </ol>
+  
+  <p style="text-align: right;">Aligning paragraphs is also easy using the Calibre editor. For example, this paragraph was aligned to the right using the <u>Align right</u> action in the editor.</p>
+  
+  <p>Sometimes you may want to format some data in a table. This can be done using the <code>&lt;table&gt;</code> tag along with the <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, and <code>&lt;td&gt;</code> tags, which stand for table header, table row, and table data, respectively. The content of the table will be defined row by row, with each row listing the header names or data values that compose it. Below is an example of a table; examining the HTML source of this chapter will show how the table tags are used to produce this result:</p>
+  
+  <table>
+  <caption>Table example</caption>
+  <tr>
+    <th>Name</th>
+    <th>ID</th>
+    <th>Birth Year</th>
+  </tr>
+  <tr>
+    <td>Alice</td>
+    <td>123456</td>
+    <td>2000</td>
+  </tr>
+  <tr>
+    <td>Bob</td>
+    <td>123457</td>
+    <td>2001</td>
+  </tr>
+  </table>
+  
+  <p>Note that this table example has a title; that title has been provided by using the <code>&lt;caption&gt;</code> tag. Also, the table borders are not present by default, but they are included here courtesy of our <i>stylesheet.css</i> style file, which specifies their presence as well as the centering of the table.</p>
+
+  <h4 id="formatting-h2">Footnotes</h4>
+      
+  <aside id="fn1" epub:type="footnote">
+  <p><a epub:type="noteref" href="#src_fn1">1.</a> This is the text of the first footnote example, placed at the end of the chapter.</p>
+  </aside>
+
+  <p id="fn2"><a href="#src_fn2">2.</a> This is the text of the second footnote example, also placed at the end of the chapter.</p>
+</body>
+</html>

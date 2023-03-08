@@ -1,0 +1,46 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="2.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title>How this ebook was edited</dc:title>
+    <dc:creator opf:role="aut" opf:file-as="Laurentiu Cristofor">Laurentiu Cristofor</dc:creator>
+    <dc:description>&lt;div&gt;
+&lt;p&gt;A walkthrough for editing this same ebook&lt;/p&gt;&lt;/div&gt;</dc:description>
+    <dc:identifier id="BookID" opf:scheme="UUID">urn:uuid:65fecaf6-9e12-4555-b63e-429406689384</dc:identifier>
+    <dc:date>2023-03-06T08:00:00+00:00</dc:date>
+    <dc:subject>ebook editing writing creation</dc:subject>
+    <dc:language>en</dc:language>
+    <dc:identifier opf:scheme="calibre">3da13166-edb4-49ea-9a4c-6bfd3cd33e95</dc:identifier>
+    <meta name="cover" content="cover"/>
+    <meta name="calibre:title_sort" content="How this ebook was edited"/>
+    <meta name="calibre:author_link_map" content="{&quot;Laurentiu Cristofor&quot;: &quot;&quot;}"/>
+  </metadata>
+  <manifest>
+    <item href="text/titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml"/>
+    <item href="text/title_copyright.xhtml" id="title_copyright" media-type="application/xhtml+xml"/>
+    <item href="text/version.xhtml" id="version" media-type="application/xhtml+xml"/>
+    <item href="text/toc.xhtml" id="toc" media-type="application/xhtml+xml"/>
+    <item href="text/introduction.xhtml" id="introduction" media-type="application/xhtml+xml"/>
+    <item href="text/organization.xhtml" id="organization" media-type="application/xhtml+xml"/>
+    <item href="text/formatting.xhtml" id="formatting" media-type="application/xhtml+xml"/>
+    <item href="text/images.xhtml" id="images" media-type="application/xhtml+xml"/>
+    <item href="text/conclusion.xhtml" id="conclusion" media-type="application/xhtml+xml"/>
+    <item href="toc.ncx" id="toc1" media-type="application/x-dtbncx+xml"/>
+    <item href="styles/stylesheet.css" id="stylesheet" media-type="text/css"/>
+    <item href="images/cover.jpg" id="cover" media-type="image/jpeg"/>
+    <item href="images/sample.jpg" id="sample_image" media-type="image/jpeg"/>
+  </manifest>
+  <spine toc="toc1">
+    <itemref idref="titlepage"/>
+    <itemref idref="title_copyright"/>
+    <itemref idref="version"/>
+    <itemref idref="toc"/>
+    <itemref idref="introduction"/>
+    <itemref idref="organization"/>
+    <itemref idref="formatting"/>
+    <itemref idref="images"/>
+    <itemref idref="conclusion"/>
+  </spine>
+  <guide>
+    <reference href="text/titlepage.xhtml" title="Cover" type="cover"/>
+  </guide>
+</package>
