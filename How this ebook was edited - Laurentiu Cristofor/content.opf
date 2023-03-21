@@ -2,14 +2,14 @@
 <package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="2.0">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
     <dc:title>How this ebook was edited</dc:title>
-    <dc:creator opf:role="aut" opf:file-as="Laurentiu Cristofor">Laurentiu Cristofor</dc:creator>
+    <dc:creator opf:role="aut" opf:file-as="Cristofor, Laurentiu">Laurentiu Cristofor</dc:creator>
     <dc:description>&lt;div&gt;
 &lt;p&gt;A walkthrough for editing this same ebook&lt;/p&gt;&lt;/div&gt;</dc:description>
     <dc:identifier id="BookID" opf:scheme="UUID">urn:uuid:65fecaf6-9e12-4555-b63e-429406689384</dc:identifier>
     <dc:date>2023-03-06T08:00:00+00:00</dc:date>
     <dc:subject>ebook editing writing creation</dc:subject>
     <dc:language>en</dc:language>
-    <dc:identifier opf:scheme="calibre">3da13166-edb4-49ea-9a4c-6bfd3cd33e95</dc:identifier>
+    <dc:identifier opf:scheme="calibre">f86ace35-a1a8-47c5-9b1b-884bf50378fb</dc:identifier>
     <meta name="cover" content="cover"/>
     <meta name="calibre:title_sort" content="How this ebook was edited"/>
     <meta name="calibre:author_link_map" content="{&quot;Laurentiu Cristofor&quot;: &quot;&quot;}"/>
