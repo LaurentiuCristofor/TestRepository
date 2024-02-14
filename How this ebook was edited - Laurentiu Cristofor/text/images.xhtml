@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head>
   <title>How this ebook was edited</title>
   <link href="../styles/stylesheet.css" rel="stylesheet" type="text/css"/>
@@ -12,7 +12,7 @@
   
   <p>If we use the <u>Insert image</u> functionality and then select our sample file, the result will be the following:</p>
   
-  <img alt="Image" src="../images/sample.jpg" />
+  <img alt="Image" src="../images/sample.jpg"/>
       
   <p>This is not bad because our style file already has some code to get us properly started here, but it would be nice to also add a caption and to ensure that the caption doesn't get split from its image by a page break. To achieve this, we'll use the <code>&lt;caption&gt;</code> tag to bundle the <code>&lt;img&gt;</code> tag with a <code>&lt;figcaption&gt;</code> tag and we'll rely on a CSS command that will require avoiding the splitting of this bundle.</p>
 
@@ -23,7 +23,7 @@
   <p>The result of all these changes is included below:</p>
 
   <figure id="img_1">
-    <img src="../images/sample.jpg" alt="A sample image" />
+    <img src="../images/sample.jpg" alt="A sample image"/>
     <figcaption><a href="toc.xhtml#img_1">Fig.1</a> - A sample image.</figcaption>
   </figure>  
         
